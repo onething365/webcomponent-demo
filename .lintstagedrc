@@ -1,0 +1,5 @@
+{
+    "src/**/*.{js,ts,tsx,vue}": [
+      "git add"
+    ]
+  }

@@ -1,0 +1,4 @@
+node_modules
+dist/
+test
+src/vite-env.d.ts
