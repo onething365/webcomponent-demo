@@ -4,6 +4,7 @@ import autoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import vue from '@vitejs/plugin-vue'
+import react from '@vitejs/plugin-react'
 import eslint from 'vite-plugin-eslint'
 import StylelintPlugin from 'vite-plugin-stylelint'
 import postcssPresetEnv from 'postcss-preset-env'
@@ -18,7 +19,14 @@ export default defineConfig(({ mode }) => {
   const shouldAnalyze = env.VITE_ANALYSIS === 'true' // 检查是否启用了分析模式
 
   const plugins = [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('my-'),
+        },
+      },
+    }),
+    react(),
     autoImport({
       imports: ['vue', 'vue-router', 'pinia'], // 需要引入的类型来源
       dts: 'src/types/auto-import.d.ts', // 根据引入来源自动生成的类型声明文件路径

@@ -1,10 +1,19 @@
 <template>
-  <div class="home-container">
-    <my-button id="myBtn" v-if="showBtn" color="blue" @btn-click="btnClick">
-      <span>按钮</span>
-    </my-button>
-    <p v-if="showBtn">5秒后消失，显示组件被移除状态</p>
-    <div ref="container"></div>
+  <div class="home-container flex">
+    <div class="w-[50%] text-center">
+      <div class="text-center font-bold h-[100px] text-[24px]">demo webcomponent</div>
+      <my-button id="myBtn" v-if="showBtn" color="blue" @btn-click="btnClick">
+        <span>按钮</span>
+      </my-button>
+      <p v-if="showBtn">5秒后消失，显示组件被移除状态</p>
+      <div ref="container"></div>
+    </div>
+    <div class="w-[50%] text-center">
+      <div class="text-center font-bold h-[100px] text-[24px]">demo webcomponent react</div>
+      <my-react-button id="myReactBtn" :bgcolor="color" @btn-click="btnReactClick">
+        <span>按钮react</span>
+      </my-react-button>
+    </div>
     <!-- <span @click="handleTestClick">test</span>
     <span @click="handleLoginClick">login</span>
     <span @click="handleGetPageClick">{{ loading ? '加载中' : '' }}page</span>
@@ -15,6 +24,12 @@
 const showBtn = ref(true)
 const container = ref(null)
 const btnClick = v => {
+  console.log('btnClick', v)
+}
+const color = ref('green')
+const btnReactClick = v => {
+  const count = v.detail.count
+  color.value = count % 2 === 0 ? 'red' : 'blue'
   console.log('btnClick', v)
 }
 onMounted(() => {
@@ -54,7 +69,6 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   height: 100%;
-  flex-direction: column;
   .home-content {
     flex: 1;
     display: flex;
